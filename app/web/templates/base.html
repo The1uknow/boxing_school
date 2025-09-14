@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="{{ lang or 'ru' }}">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>{{ tx.site_name }}</title>
+  <meta name="description" content="{{ tx.hero_sub }}">
+  <link rel="stylesheet" href="{{ url_for('static', path='styles.css') }}">
+  <meta property="og:title" content="{{ tx.site_name }}">
+  <meta property="og:description" content="{{ tx.hero_sub }}">
+</head>
+<body>
+<header class="header">
+  <div class="container row-between">
+    <div class="logo">{{ tx.site_name }}</div>
+    <nav class="nav">
+      <a href="/?lang={{ lang }}#services">{{ tx.services }}</a>
+      <a href="/?lang={{ lang }}#pricing">{{ tx.pricing }}</a>
+      <a href="/?lang={{ lang }}#about">{{ tx.about }}</a>
+      <a class="lang" href="/?lang={{ alt_lang }}">{{ 'UZ' if alt_lang=='uz' else 'RU' }}</a>
+    </nav>
+  </div>
+</header>
+<main>
+  {% block content %}{% endblock %}
+</main>
+<footer class="footer">
+  <div class="container muted">made by Mukhsin Kamolov</div>
+</footer>
+</body>
+</html>

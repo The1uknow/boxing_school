@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Лиды — Школа бокса{% endblock %}
+{% block content %}
+  <h1 class="page-title">Лиды</h1>
+
+  <div class="table-wrap">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Имя</th>
+          <th>Возраст</th>
+          <th>Телеграм</th>
+          <th>Телефон</th>
+          <th>Источник</th>
+          <th>Статус</th>
+          <th>Создан</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for l in items %}
+        <tr>
+          <td>{{ l.id }}</td>
+          <td>{{ l.name }}</td>
+          <td>{{ l.age }}</td>
+          <td>{{ l.tg_username }}</td>
+          <td>{{ l.phone }}</td>
+          <td>{{ l.source }}</td>
+          <td>
+            <form action="{{ url_for('lead_toggle_processed', lead_id=l.id) }}" method="post">
+              <label class="checkbox">
+                <input type="checkbox" onchange="this.form.submit()" {% if l.processed %}checked{% endif %}>
+                обработан
+              </label>
+            </form>
+          </td>
+          <td>{{ l.created }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="7" class="subtle center">Пока нет данных</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

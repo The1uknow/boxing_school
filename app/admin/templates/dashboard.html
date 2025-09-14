@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Статистика — Школа бокса{% endblock %}
+{% block content %}
+  <h1 class="page-title">Статистика</h1>
+
+  <div class="table-wrap">
+    <table class="table data-table stats-table">
+      <thead>
+        <tr>
+          <th>Метрика</th>
+          <th>Значение</th>
+          <th>Комментарий</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Родители</td>
+          <td class="value">{{ parents }}</td>
+          <td class="subtle">Всего профилей</td>
+        </tr>
+        <tr>
+          <td>Дети</td>
+          <td class="value">{{ children }}</td>
+          <td class="subtle">Активные ученики</td>
+        </tr>
+        <tr>
+          <td>Лиды</td>
+          <td class="value">{{ leads }}</td>
+          <td class="subtle">Ожидают обработки</td>
+        </tr>
+        <tr>
+          <td>Записи</td>
+          <td class="value">{{ appts }}</td>
+          <td class="subtle">Ближайшие записи</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Родители — Школа бокса{% endblock %}
+
+{% block content %}
+<h1 class="page-title">Родители</h1>
+
+<div class="table-wrap">
+  <table class="table data-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Телеграм</th>
+        <th>ФИО</th>
+        <th>Телефон</th>
+        <th>Язык</th>
+        <th>Создан</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for p in items %}
+      <tr>
+        <td>{{ p.id }}</td>
+        <td>{{ tg_at(p.tg_username) }}</td>
+        <td>
+          <form action="{{ url_for('parent_update', parent_id=p.id) }}" method="post" class="inline-form">
+            <input type="text" name="full_name" value="{{ p.full_name or '' }}" maxlength="120">
+            <button type="submit">Сохранить</button>
+          </form>
+        </td>
+        <td>{{ p.phone or '' }}</td>
+        <td>{{ p.language or '' }}</td>
+        <td>{{ p.created_at | dmy }}</td>
+        <td></td>
+      </tr>
+      {% else %}
+      <tr>
+        <td colspan="7" class="subtle center">Пока нет данных</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

@@ -1,0 +1,15 @@
+pytelegrambotapi
+Flask==3.0.3
+SQLAlchemy
+WTForms==3.1.2
+Werkzeug==3.0.3
+pydantic
+pydantic-settings
+fastapi
+uvicorn
+jinja2
+itsdangerous
+python-multipart
+flasgger
+python-dotenv
+requests

@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+*.db
+.env
+.env.*
+/site/.next
+/site/node_modules
+/site/.turbo
+/site/.vercel
+/staticfiles
+/media
+EOF

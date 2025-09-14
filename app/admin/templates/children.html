@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Дети{% endblock %}
+
+{% block content %}
+<h1 class="page-title">Дети</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Имя</th>
+      <th>Возраст</th>
+      <th>Телеграм</th>
+      <th>Оплата</th>
+      <th>Расписание (текст)</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for c in items %}
+      <tr>
+        <td>{{ c.id }}</td>
+        <td>
+          <form action="{{ url_for('children_update', child_id=c.id) }}" method="post" class="inline-form">
+            <input type="text" name="name" value="{{ c.name or '' }}" maxlength="80">
+            <input type="number" name="age" value="{{ c.age or '' }}" min="0" style="width:80px">
+
+            <label class="checkbox" for="paid-{{ c.id }}">
+              <input
+                  type="checkbox"
+                  id="paid-{{ c.id }}"
+                  name="paid"
+                  value="1"
+                  {% if c.paid|default(false) %}checked{% endif %}
+                >
+                Оплачен
+              </label>
+
+<textarea name="schedule_text" rows="1" placeholder="Расписание...">{{ c.schedule_text|default('') }}</textarea>
+            <button type="submit">Сохранить</button>
+          </form>
+        </td>
+        <td>{{ tg_at(c.tg_username|default(None)) }}</td>
+        <td>{% if c.paid|default(false) %}Да{% else %}Нет{% endif %}</td>
+        <td>{{ c.schedule_text|default('') }}</td>
+        <td></td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Записи — Школа бокса{% endblock %}
+{% block content %}
+  <h1 class="page-title">Записи на пробные</h1>
+
+  <div class="table-wrap">
+    <table class="table data-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Ребёнок</th>
+          <th>Телеграм ребёнка</th>
+          <th>Создан</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for a in items %}
+        <tr>
+          <td>{{ a.id }}</td>
+          <td>{{ a.child_name }}</td>
+          <td>{{ a.child_tg }}</td>
+          <td>{{ a.created }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="4" class="subtle center">Пока нет данных</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

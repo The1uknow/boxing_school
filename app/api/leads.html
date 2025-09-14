@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Школа бокса — бесплатная пробная{% endblock %}
+{% block content %}
+<section class="container hero grid-2">
+  <div>
+    <h1>Школа бокса в Ташкенте</h1>
+    <p class="lead">Индивидуальные и групповые тренировки. Первая тренировка — бесплатно.</p>
+    <ul class="bullets">
+      <li>Проф. тренеры</li>
+      <li>Детские и взрослые группы</li>
+      <li>Удобная локация</li>
+    </ul>
+    <p class="muted">Или сразу напишите нам: <a href="https://t.me/{{ bot_username }}" target="_blank">@{{ bot_username }}</a></p>
+  </div>
+
+  <div class="card">
+    <h2>Записаться</h2>
+    <form id="lead-form" class="vstack">
+      <label>Имя
+        <input name="name" required minlength="2" placeholder="Ваше имя"/>
+      </label>
+      <label>Телефон
+        <input name="phone" required minlength="7" placeholder="+998 xx xxx xx xx"/>
+      </label>
+      <label>Возраст
+        <input name="age" placeholder="Напр. 16"/>
+      </label>
+      <label>Комментарий (необязательно)
+        <textarea name="comment" rows="4" placeholder="Когда удобно? Цели?"></textarea>
+      </label>
+      <button class="btn primary">Отправить</button>
+      <div id="lead-state" class="muted"></div>
+    </form>
+  </div>
+</section>
+
+<script>
+const form = document.getElementById('lead-form');
+const state = document.getElementById('lead-state');
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  state.textContent = 'Отправка...';
+  const data = Object.fromEntries(new FormData(form).entries());
+  const res = await fetch('/api/leads', {
+    method: 'POST', headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(data)
+  });
+  if (res.ok) { form.reset(); state.textContent = 'Готово! Мы свяжемся с вами.'; }
+  else { state.textContent = 'Ошибка. Попробуйте ещё раз.'; }
+});
+</script>
+{% endblock %}

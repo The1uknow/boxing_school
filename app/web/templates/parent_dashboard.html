@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Кабинет родителя{% endblock %}
+
+{% block content %}
+<section class="container">
+  <h1>Кабинет родителя</h1>
+
+  {% if parent %}
+    <div class="card" style="margin-bottom:20px;">
+      <p><b>Имя:</b> {{ parent.full_name or "—" }}</p>
+      <p><b>Телефон:</b> {{ parent.phone or "—" }}</p>
+      <p><b>Город:</b> {{ parent.city or "—" }}</p>
+      <p><b>Язык:</b> {{ parent.language }}</p>
+    </div>
+
+    <h2>Ваши заявки</h2>
+    {% if leads %}
+      <ul>
+        {% for lead in leads %}
+          <li>
+            {{ lead.created_at.strftime("%d.%m.%Y %H:%M") }} —
+            {{ lead.name }} ({{ lead.phone }})
+            {% if lead.age %}, {{ lead.age }} лет{% endif %}
+            {% if lead.comment %} — «{{ lead.comment }}»{% endif %}
+            [Статус: {{ lead.status }}]
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="muted">Пока нет заявок.</p>
+    {% endif %}
+  {% else %}
+    <p class="muted">Профиль не найден.</p>
+  {% endif %}
+</section>
+{% endblock %}

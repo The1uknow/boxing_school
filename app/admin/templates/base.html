@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Школа бокса — админка{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+  <!-- навигация -->
+  <nav class="topbar" role="navigation" aria-label="Главное меню">
+    <div class="brand"><h1>Школа бокса</h1></div>
+
+    {% if session.get('admin_logged') %}
+    <div class="menu">
+      <a href="{{ url_for('dashboard') }}"         class="{% if request.endpoint=='dashboard' %}active{% endif %}">Статистика</a>
+      <a href="{{ url_for('leads_view') }}"        class="{% if request.endpoint=='leads_view' %}active{% endif %}">Лиды</a>
+      <a href="{{ url_for('parents_view') }}"      class="{% if request.endpoint=='parents_view' %}active{% endif %}">Родители</a>
+      <a href="{{ url_for('children_view') }}"     class="{% if request.endpoint=='children_view' %}active{% endif %}">Дети</a>
+      <a href="{{ url_for('appointments_view') }}" class="{% if request.endpoint=='appointments_view' %}active{% endif %}">Записи</a>
+      <a href="{{ url_for('messages.messages') }}"     class="{% if request.endpoint=='messages.messages' %}active{% endif %}">Сообщения</a>
+      <a href="{{ url_for('export_csv') }}">Экспорт CSV</a>
+      <a href="{{ url_for('logout') }}">Выход</a>
+    </div>
+    {% endif %}
+  </nav>
+
+  <!-- контент -->
+  <main class="container">
+    {% block content %}{% endblock %}
+  </main>
+
+</body>
+</html>

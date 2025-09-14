@@ -1,0 +1,160 @@
+from app.core.config import settings
+
+# --- Переводы для бота ---
+I18N = {
+    "ru": {
+        "start": "Привет! Я бот школы бокса 🥊\nПомогу записать ребенка на пробное занятие и отвечу на вопросы.",
+        "choose_lang": "Выберите язык / Tilni tanlang",
+        "main_menu": "Главное меню",
+        "btn_sign": "Записать на пробное",
+        "btn_back": "Назад",
+        "btn_prices": "Цены",
+        "btn_schedule": "Расписание",
+        "btn_create_child": "Добавить ребенка",
+        "btn_my_children": "Мои дети",
+        "btn_help": "Помощь",
+        "ask_fullname": "Как вас зовут? (ФИО)",
+        "ask_phone": "Оставьте телефон для связи",
+        "ask_city": "Ваш город/район?",
+        "ask_child_name": "Имя ребенка?",
+        "ask_child_age": "Сколько лет ребенку?",
+        "child_saved": "Готово! Ребёнок сохранён ✅",
+        "prices_text": "Актуальные тарифы:\n• 4 занятия — 300 000 сум\n• 8 занятий — 520 000 сум\n• Индивидуально — 150 000 за урок",
+        "schedule_text": "Занятия: Пн / Ср / Пт — 17:00 до 19:00",
+        "sign_when": "Выберите удобное время пробного:",
+        "sign_done": "Записал! Мы свяжемся для подтверждения 👌",
+        "help_text": "Задайте вопрос — тренер ответит в ближайшее время.",
+        "memes_hint": "Пока ждёте — вот мотивационный мем 💪",
+        "btn_pay": "Оплатить курсы",
+        "ask_parent_name": "Введите свое имя:",
+        "hello_named": "Привет, {name}! Я бот школы бокса 🥊\nПомогу записать ребёнка на пробное занятие и отвечу на вопросы.",
+        "kid_quiz": "Сыграть в игру",
+        "kid_schedule": "Мое расписание",
+        "kid_help": "Помощь",
+        "ask_parent_phone": "📱 Пожалуйста, укажите ваш номер телефона.\nВы можете ввести его вручную или нажать кнопку ниже:",
+        "ask_phone_retry": "❌ Неверный формат. Попробуйте снова или воспользуйтесь кнопкой:",
+        "btn_share_phone": "📲 Отправить мой номер",
+        "link_is_for_child": "⚠️ Эта ссылка предназначена для ребёнка, а не для родителя.",
+        "child_linked_parent": "✅ Ребёнок {name} успешно привязан к вашему аккаунту!",
+        "child_linked_child": "👋 Привет, {name}! Теперь ты получаешь задания от школы бокса.",
+        "my_kids_schedule_title": "📅 Расписание ваших детей:",
+        "sched_wait_payment": "⏳ После оплаты тренер установит расписание.",
+        "sched_not_set": "⚠️ Расписание пока не назначено.",
+    },
+    "uz": {
+        "start": "Salom! Bu boks maktabi boti 🥊\nFarzandingizni sinov darsiga yozishda yordam beraman va savollarga javob beraman.",
+        "choose_lang": "Tilni tanlang / Выберите язык",
+        "main_menu": "Asosiy menyu",
+        "btn_sign": "Sinov darsiga yozish",
+        "btn_back": "Orqaga",
+        "btn_prices": "Narxlar",
+        "btn_schedule": "Dars jadvali",
+        "btn_create_child": "Bola qo'shish",
+        "btn_my_children": "Bolalarim",
+        "btn_help": "Yordam",
+        "ask_fullname": "Ismingiz va familiyangiz?",
+        "ask_phone": "Aloqa uchun telefon raqam qoldiring",
+        "ask_city": "Qaysi shahar/tuman?",
+        "ask_child_name": "Bolani ismi?",
+        "ask_child_age": "Bolaning yoshi nechida?",
+        "child_saved": "Tayyor! Bola saqlandi ✅",
+        "prices_text": "Amaldagi tariflar:\n• 4 dars — 300 000 so'm\n• 8 dars — 520 000 so'm\n• Individual — darsiga 150 000",
+        "schedule_text": "Darslari: Du/Chor/Juma — 15:00 - 19:00",
+        "sign_when": "Qulay vaqtni tanlang:",
+        "sign_done": "Yozdim! Tasdiqlash uchun aloqaga chiqamiz 👌",
+        "help_text": "Savolingizni yozing — murabbiy tez orada javob beradi.",
+        "memes_hint": "Kutar ekanmiz — mana motivatsion mem 💪",
+        "btn_pay": "Kursga to'lash",
+        "ask_parent_name": "Ismingizni kiriting:",
+        "kid_quiz": "O'yin o'ynash",
+        "kid_help": "Yordam",
+        "ask_parent_phone": "📱 Iltimos, telefon raqamingizni kiriting.\nUni qo‘lda yozishingiz yoki quyidagi tugmadan foydalanishingiz mumkin:",
+        "ask_phone_retry": "❌ Noto‘g‘ri format. Qayta urinib ko‘ring yoki tugmadan foydalaning:",
+        "btn_share_phone": "📲 Raqamimni yuborish",
+        "kid_schedule": "Mening raspisaniyam",
+        "hello_named": "Salom, {name}! Men boks maktabi botiman 🥊\nFarzandingizni birinchi mashg‘ulotga yozishda va savollarga javob berishda yordam beraman.",
+        "link_is_for_child": "⚠️ Bu havola ota-ona uchun emas, bola uchun mo‘ljallangan.",
+        "child_linked_parent": "✅ Bola {name} sizning akkauntingizga muvaffaqiyatli bog‘landi!",
+        "child_linked_child": "👋 Salom, {name}! Endi sen boks maktabidan topshiriqlarni olasan.",
+        "my_kids_schedule_title": "📅 Farzandlaringizning jadvali:",
+        "sched_wait_payment": "⏳ To‘lovdan keyin murabbiy jadvalni belgilaydi.",
+        "sched_not_set": "⚠️ Jadval hali belgilanmagan.",
+    }
+}
+
+def t(lang: str, key: str) -> str:
+    """Переводы для бота."""
+    lang = lang if lang in I18N else settings.DEFAULT_LANG
+    return I18N.get(lang, I18N[settings.DEFAULT_LANG]).get(key, key)
+
+# --- Тексты для сайта (RU/UZ) ---
+TX = {
+    "ru": {
+        "site_name": "Школа бокса",
+        "hero_title": "Школа бокса в Ташкенте",
+        "hero_sub": "Индивидуальные и групповые тренировки. Первая тренировка — бесплатно.",
+        "cta_title": "Запись на бесплатную тренировку",
+        "name": "Имя",
+        "phone": "Телефон",
+        "age": "Возраст",
+        "comment": "Комментарий (необязательно)",
+        "send": "Отправить",
+        "services": "Наши направления",
+        "srv1": "Бокс для новичков",
+        "srv2": "Детские группы",
+        "srv3": "Индивидуально",
+        "pricing": "Тарифы",
+        "p1_title": "Разовое занятие",
+        "p1_desc": "60 минут • Подходит новичкам",
+        "p2_title": "8 занятий",
+        "p2_desc": "2 месяца • Экономия 20%",
+        "p3_title": "Индивидуально",
+        "p3_desc": "1×1 с тренером",
+        "about": "О школе",
+        "about_text": "Тренеры с проф. опытом, удобное расположение, дружелюбная атмосфера. Первое занятие поможет понять уровень и цели.",
+        "privacy_hint": "Нажимая «Отправить», вы соглашаетесь с политикой конфиденциальности.",
+        "sent_ok": "Заявка отправлена! Мы свяжемся с вами.",
+        "sent_err": "Ошибка. Попробуйте ещё раз.",
+        "tg_username": "Телеграм (юзернейм)",
+    },
+    "uz": {
+        "site_name": "Boks maktabi",
+        "hero_title": "Toshkentda boks maktabi",
+        "hero_sub": "Individual va guruh mashg‘ulotlari. Birinchi dars — bepul.",
+        "cta_title": "Bepul darsga yozilish",
+        "name": "Ism",
+        "phone": "Telefon",
+        "age": "Yosh",
+        "comment": "Izoh (majburiy emas)",
+        "send": "Yuborish",
+        "services": "Yo‘nalishlarimiz",
+        "srv1": "Yangi boshlovchilar uchun boks",
+        "srv2": "Bolalar guruhlari",
+        "srv3": "Individual mashg‘ulotlar",
+        "pricing": "Narxlar",
+        "p1_title": "Bir martalik dars",
+        "p1_desc": "60 daqiqa • Yangi boshlovchilar uchun mos",
+        "p2_title": "8 ta dars",
+        "p2_desc": "2 oy • 20% tejash",
+        "p3_title": "Individual",
+        "p3_desc": "Murabbiy bilan 1×1",
+        "about": "Maktab haqida",
+        "about_text": "Professional murabbiylar, qulay joylashuv, do‘stona muhit. Birinchi dars darajangiz va maqsadlaringizni aniqlashga yordam beradi.",
+        "privacy_hint": "«Yuborish» tugmasini bosib, maxfiylik siyosatiga rozilik bildirasiz.",
+        "sent_ok": "So‘rov yuborildi! Siz bilan bog‘lanamiz.",
+        "sent_err": "Xatolik. Qayta urinib ko‘ring.",
+        "tg_username": "Telegram foydalanuvchi nomi",
+    },
+}
+
+def pick_lang(value: str | None, default: str | None = None) -> str:
+    """Определить язык сайта по query/дефолту из настроек."""
+    default = default or settings.DEFAULT_LANG or "ru"
+    if not value:
+        return default
+    v = value.lower()
+    return "uz" if v.startswith("uz") else "ru"
+
+def get_tx(lang: str) -> dict:
+    """Тексты для сайта по коду языка."""
+    return TX.get(lang, TX["ru"])

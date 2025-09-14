@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Сообщения{% endblock %}
+
+{% block content %}
+<h1 class="page-title">Сообщения</h1>
+
+<form method="post" class="card" style="max-width:760px;margin:0 auto;">
+  <div class="form-row">
+    <label>Получатели</label>
+    <div class="radio-group" style="display:flex;gap:16px;align-items:center;">
+      <label>
+        <input type="radio" name="audience" value="parents"
+               {% if not form.audience.data or form.audience.data =="parents" %}checked{% endif %}>
+        Пользователи бота (родители)
+      </label>
+      <label style="margin-left:1rem;">
+        <input type="radio" name="audience" value="children"
+               {% if form.audience.data =='children' %}checked{% endif %}>
+        Только дети
+      </label>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <label>Текст сообщения</label>
+    <textarea name="text" class="input" rows="7" placeholder="Введите текст сообщения..." required>{{ form.text.data or '' }}</textarea>
+  </div>
+
+  <button class="btn" type="submit">Отправить</button>
+</form>
+
+<div style="height:24px;"></div>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="card" style="max-width:760px;margin:0 auto;">
+      {% for category, msg in messages %}
+        <p class="{{ category }}">{{ msg }}</p>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+{% endblock %}

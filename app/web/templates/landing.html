@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+{% block title %}{{ tx.site_name }}{% endblock %}
+
+{% block content %}
+<section class="container">
+  <div class="hero">
+    <h1>{{ tx.hero_title }}</h1>
+    <p class="lead">{{ tx.hero_sub }}</p>
+    <div class="badges">
+      <span class="chip">🥊 boxing</span>
+      <span class="chip">⚡️ hi-intensity</span>
+      <span class="chip">🧒 kids & adults</span>
+    </div>
+  </div>
+</section>
+
+<section class="container section" id="services">
+  <h2>{{ tx.services }}</h2>
+  <div class="grid3">
+    <div class="card glass">
+      <div class="card-title">
+        <svg class="icon" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
+          <path d="M8 3c-2.2 0-4 1.8-4 4v5c0 2.2 1.8 4 4 4h1v3a2 2 0 0 0 2 2h3v-9a4 4 0 0 0-4-4H9V7c0-2.2-1.8-4-4-4z" fill="currentColor" opacity=".85"/>
+        </svg>
+        <h3>{{ tx.srv1 }}</h3>
+      </div>
+      <p class="muted">Техника, стойка, базовые удары. Для тех, кто только начинает.</p>
+    </div>
+
+    <div class="card glass">
+      <div class="card-title">
+        <svg class="icon" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
+          <path d="M12 3C7 3 3 7 3 12v3a3 3 0 0 0 3 3h2v-5H6v-1a6 6 0 0 1 12 0v1h-2v5h2a3 3 0 0 0 3-3v-3c0-5-4-9-9-9z" fill="currentColor" opacity=".85"/>
+        </svg>
+        <h3>{{ tx.srv2 }}</h3>
+      </div>
+      <p class="muted">Безопасные и мотивирующие тренировки для детей от 6 лет.</p>
+    </div>
+
+    <div class="card glass">
+      <div class="card-title">
+        <svg class="icon" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
+          <path d="M12 8v5l4 2M9 3h6M12 5a9 9 0 1 0 0 18 9 9 0 0 0 0-18z" fill="none" stroke="currentColor" stroke-width="2"/>
+        </svg>
+        <h3>{{ tx.srv3 }}</h3>
+      </div>
+      <p class="muted">Индивидуальная программа под цель: похудение, техника, выносливость.</p>
+    </div>
+  </div>
+</section>
+
+<section class="container section" id="pricing">
+  <h2>{{ tx.pricing }}</h2>
+  <div class="grid3">
+    <div class="card glass price-card">
+      <div class="price-title">{{ tx.p1_title }}</div>
+      <div class="price">120 000 UZS</div>
+      <div class="muted">{{ tx.p1_desc }}</div>
+    </div>
+    <div class="card glass price-card">
+      <div class="price-title">{{ tx.p2_title }}</div>
+      <div class="price">800 000 UZS</div>
+      <div class="muted">{{ tx.p2_desc }}</div>
+    </div>
+    <div class="card glass price-card">
+      <div class="price-title">{{ tx.p3_title }}</div>
+      <div class="price">250 000+ UZS</div>
+      <div class="muted">{{ tx.p3_desc }}</div>
+    </div>
+  </div>
+</section>
+
+<section class="container section" id="about">
+  <h2>{{ tx.about }}</h2>
+  <div class="about glass">
+    <p>{{ tx.about_text }}</p>
+  </div>
+</section>
+
+<section class="container section">
+  <div class="card glass" id="contact">
+    <h3>{{ tx.cta_title }}</h3>
+    <form id="leadForm" class="form" action="/api/leads-form" method="post" novalidate>
+      <label>{{ tx.name }}
+        <input name="name" required minlength="2" placeholder=""/>
+      </label>
+
+      <label>{{ tx.phone }}
+        <input name="phone" type="tel" inputmode="tel" autocomplete="tel" required minlength="7" placeholder=""/>
+      </label>
+
+      <label>{{ tx.age }}
+        <input name="age" type="number" min="0" step="1" placeholder=""/>
+      </label>
+
+      <label>{{ tx.tg_username }}
+        <input name="tg_username" placeholder="@username"/>
+      </label>
+
+      <button class="btn primary" type="submit">{{ tx.send }}</button>
+      <div class="muted xsmall">{{ tx.privacy_hint }}</div>
+      <div id="state" class="muted" style="margin-top:6px"></div>
+    </form>
+  </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('leadForm');
+  const state = document.getElementById('state');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault(); // перехватываем, иначе пойдёт обычный сабмит
+    state.textContent = '...';
+
+    const data = Object.fromEntries(new FormData(form).entries());
+
+    // нормализация полей
+    if (data.age === '') {
+      delete data.age;
+    } else {
+      data.age = parseInt(data.age, 10);
+    }
+    if (data.tg_username) {
+      data.tg_username = String(data.tg_username).trim().replace(/^@+/, '');
+    }
+    data.source = 'site';
+
+    try {
+      const res = await fetch('/api/leads', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)
+      });
+
+      if (res.ok) {
+        form.reset();
+        state.textContent = {{ tx.sent_ok | tojson }};
+      } else {
+        const txt = await res.text();
+        console.error('Lead create error:', txt);
+        state.textContent = {{ tx.sent_err | tojson }};
+        // запасной вариант: если API вернул 422 и т.п., отправим обычной формой
+        // form.submit();
+      }
+    } catch (err) {
+      console.error(err);
+      state.textContent = {{ tx.sent_err | tojson }};
+      // при сетевой ошибке тоже можно fallback:
+      // form.submit();
+    }
+  });
+});
+</script>
+
+{% endblock %}

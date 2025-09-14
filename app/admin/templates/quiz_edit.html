@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Редактор квиза — Школа бокса{% endblock %}
+{% block content %}
+  <h1 class="page-title">Редактор квиза (заглушка)</h1>
+  <form class="card form" method="post">
+    <div class="row">
+      <label>Название</label>
+      <input name="title" placeholder="Квиз по боксу">
+    </div>
+    <div class="row">
+      <label>Активен</label>
+      <select name="is_active">
+        <option value="1">Да</option>
+        <option value="0">Нет</option>
+      </select>
+    </div>
+    <button class="btn primary" type="submit">Сохранить</button>
+  </form>
+{% endblock %}
