@@ -1,9 +1,9 @@
 from telebot import TeleBot, types, apihelper
-from app.core.config import settings
-from app.core.db import Base, engine, db_session
-from app.core.i18n import t
-from app.core.utils import get_or_create_parent, add_child, list_children, create_appointment
-from app.core.models import Parent, Child
+from core.config import settings
+from core.db import Base, engine, db_session
+from core.i18n import t
+from core.utils import get_or_create_parent, add_child, list_children, create_appointment
+from core.models import Parent, Child
 from datetime import datetime, timedelta, UTC
 from sqlalchemy import text as sql_text
 import threading, time, traceback, requests
