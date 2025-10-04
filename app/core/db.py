@@ -3,7 +3,7 @@ from contextlib import contextmanager
 from typing import Generator, Iterator
 from sqlalchemy import create_engine, event
 from sqlalchemy.orm import Session, sessionmaker, declarative_base
-from app.core.config import settings
+from core.config import settings
 
 # -------- Engine --------
 DB_URL = settings.DATABASE_URL

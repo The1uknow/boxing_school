@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from app.core.models import MessageTemplate
+from core.models import MessageTemplate
 
 
 def seed_templates(db: Session):

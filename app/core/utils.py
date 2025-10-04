@@ -4,7 +4,7 @@ from typing import List, Optional
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
 
-from app.core.models import Parent, Child, Appointment
+from core.models import Parent, Child, Appointment
 
 
 def get_or_create_parent(db: Session, tg_id: str, lang: str, ref_code: str = "") -> Parent:

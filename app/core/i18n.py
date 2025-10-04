@@ -1,4 +1,4 @@
-from app.core.config import settings
+from core.config import settings
 
 # --- Переводы для бота ---
 I18N = {

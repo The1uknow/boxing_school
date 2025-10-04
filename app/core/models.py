@@ -4,7 +4,7 @@ from sqlalchemy import (
     Column, Integer, String, DateTime, Boolean, ForeignKey, Text, UniqueConstraint, Index, func
 )
 from sqlalchemy.orm import relationship, Mapped
-from app.core.db import Base
+from core.db import Base
 
 # --------------------------- CRM ---------------------------
 

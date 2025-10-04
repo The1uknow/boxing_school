@@ -1,6 +1,6 @@
 import secrets
 from itsdangerous import URLSafeSerializer
-from app.core.config import settings
+from core.config import settings
 
 def generate_token(n: int = 24) -> str:
     return secrets.token_urlsafe(n)

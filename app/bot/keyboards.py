@@ -1,5 +1,5 @@
 from telebot import types
-from app.core.i18n import t
+from core.i18n import t
 
 def main_kb(lang: str, has_child: bool = False):
     kb = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)

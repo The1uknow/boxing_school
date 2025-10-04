@@ -2,11 +2,11 @@ from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 import os
-from app.core.config import settings
-from app.core.db import init_db
-from app.api.lead_routes import router as lead_router
-from app.web.routes_public import router as public_router
-from app.web.routes_parent import router as parent_router
+from core.config import settings
+from core.db import init_db
+from api.lead_routes import router as lead_router
+from web.routes_public import router as public_router
+from web.routes_parent import router as parent_router
 
 
 app = FastAPI(title="Boxing School")
