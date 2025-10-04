@@ -1,1 +1,1 @@
-worker: python3 -m app.app.bot.bot
+worker: python3 app/bot/bot.py
